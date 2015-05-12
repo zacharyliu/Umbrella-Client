@@ -37,7 +37,7 @@ void loop() {
 
 void onPacket(const uint8_t* buffer, size_t size)
 {
-  if (isRunning) return;
+//  if (isRunning) return;
 
   isRunning = true;
   
@@ -59,7 +59,7 @@ void onPacket(const uint8_t* buffer, size_t size)
   // Run animation
   int duration = buffer[0] + (buffer[1] << 8) + (buffer[2] << 16) + (buffer[3] << 24);
   int steps = max(10, (long) duration * STEPS_PER_SECOND / 1000);
-  pixel_fader.push(duration, steps);
+  pixel_fader.push(duration, steps, LINEAR_DECAY);
   
   isRunning = false;
 }
